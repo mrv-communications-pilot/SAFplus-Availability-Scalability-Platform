@@ -14,3 +14,7 @@
 # For more  information,  see the  file COPYING provided with this
 # material.
 include $(BUILD_ROOT)/mk/make-cross.mk
+
+ifneq ($(wildcard $(PROJECT_ROOT)/$(ASP_MODEL_NAME)/mk/custom-make-common.mk),) 
+include $(PROJECT_ROOT)/$(ASP_MODEL_NAME)/mk/custom-make-common.mk
+endif
