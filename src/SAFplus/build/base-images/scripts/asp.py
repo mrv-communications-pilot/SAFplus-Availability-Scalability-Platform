@@ -638,7 +638,9 @@ def start_snmp_daemon():
             etc_dir,
             '/usr/local/etc/snmp',
             '/usr/local/share/snmp',
-            '/usr/local/lib/snmp'
+            '/usr/local/lib/snmp',
+            '/var/lib/snmp/'
+
             ]
 
         old_snmp_conf_path = os.getenv('SNMPCONFPATH')
@@ -657,8 +659,14 @@ def start_snmp_daemon():
         else: snmpd_modules_flag = "-I " + snmpd_modules_flag
 
         log.info('Starting SNMP daemon...')
-        cmd = 'setsid %s %s -DH -Lo -f -C -c %s/etc/snmpd.conf '\
+     #   cmd = 'setsid %s %s -DH -Lo -f -C -c %s/etc/snmpd.conf '\
+      #        '>/dev/null 2>&1 &' % (snmpd_exe, snmpd_modules_flag, get_asp_sandbox_dir())
+
+        cmd = 'setsid %s %s -Dagent_registry,register_mib -Dread_config -Lf var/log/SNMPD.log -I-system_mib -I-ifTable -I-at -I-ip \
+              -f -c %s/etc/snmpd.conf,/usr/local/etc/snmp/snmpd.community.conf '\
               '>/dev/null 2>&1 &' % (snmpd_exe, snmpd_modules_flag, get_asp_sandbox_dir())
+
+
         if int(os.system(cmd)):
             fail_and_exit('Failed to start snmp daemon')
 
