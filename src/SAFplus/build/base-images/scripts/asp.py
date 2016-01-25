@@ -1362,7 +1362,8 @@ def kill_asp(lock_remove = True):
         if is_executable_file(f):
             cmd = sys_asp['get_kill_asp_cmd'](f)
             ret = os.system(cmd)
-            log.info("Killed [%s] with command [%s] -> %d" % (f,cmd, ret))
+            #log.info("Killed [%s] with command [%s] -> %d" % (f,cmd, ret))
+            log.debug("Killed [%s] with command [%s] -> %d" % (f,cmd, ret))
         if is_valgrind_build():
             for pid, exe in pid_cwd_list:
                 if exe == f:
