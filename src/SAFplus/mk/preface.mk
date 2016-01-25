@@ -71,7 +71,7 @@ CL_CM  :=
 CM_CFLAGS :=
 CM_COMP_DEP :=
 CM_CONFLICT_RESOLVE_OBJS = $(BASE_OBJ_DIR)/components/ground/client/clGroundCm.o
-$(warning Not using the chassis manager)
+#$(warning Not using the chassis manager)
 endif
 
 endif
