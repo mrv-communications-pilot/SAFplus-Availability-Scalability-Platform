@@ -350,6 +350,25 @@ populate_prereqs() {
             res_array[${#res_array[@]}]=$?
                 op_array[${#op_array[@]}]="install xmlrpc libraries"
         fi
+        
+        
+        # tipc
+		echo -n " tipc "
+		if [ -f $toolchaindir/bin/tipc-config ]; then
+			if [ ! -d $imagedir/modules ]; then
+				mkdir -p $imagedir/modules
+			fi
+			if [ ! -d $imagedir/bin ]; then
+				mkdir -p $imagedir/bin
+			fi
+			if [ -f $toolchaindir/bin/tipc-config ]; then
+				cp $toolchaindir/bin/tipc-config $imagedir/bin
+			fi
+			if [ -f $toolchaindir/modules/tipc.ko ]; then
+				cp $toolchaindir/modules/tipc.ko $imagedir/modules
+			fi
+		fi
+
 
         echo ""
 
