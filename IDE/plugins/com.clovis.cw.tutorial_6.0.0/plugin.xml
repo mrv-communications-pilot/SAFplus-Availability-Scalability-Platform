@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+   <extension
+         point="org.eclipse.ui.cheatsheets.cheatSheetContent">
+      <category
+            id="com.clovis.cw.tutorial.category"
+            name="OpenClovis IDE Tutorials">
+      </category>
+      <cheatsheet
+            category="com.clovis.cw.tutorial.category"
+            composite="true"
+            contentFile="content_files/modelDevelopment.xml"
+            id="com.clovis.cw.tutorial.cheatsheet.modelDevlopment"
+            name="Develop OpenClovis model">
+      </cheatsheet>
+      <cheatsheet
+            category="com.clovis.cw.tutorial.category"
+            contentFile="content_files/createModel.xml"
+            id="com.clovis.cw.tutorial.cheatsheet.createModel"
+            name="Create Model">
+      </cheatsheet>
+      <cheatsheet
+            category="com.clovis.cw.tutorial.category"
+            contentFile="content_files/configureHA.xml"
+            id="com.clovis.cw.tutorial.cheatsheet.configureHA"
+            name="Configure HA (High Availability)">
+      </cheatsheet>
+      <cheatsheet
+            category="com.clovis.cw.tutorial.category"
+            contentFile="content_files/performManageability.xml"
+            id="com.clovis.cw.tutorial.cheatsheet.performManageability"
+            name="Perform manageability">
+      </cheatsheet>
+      <cheatsheet
+            category="com.clovis.cw.tutorial.category"
+            contentFile="content_files/buildAndDeploy.xml"
+            id="com.clovis.cw.tutorial.cheatsheet.buildAndDeploy"
+            name="Build and deploy">
+      </cheatsheet>
+   </extension>
+   <extension
+         point="org.eclipse.ui.startup">
+      <startup
+            class="com.clovis.cw.tutorial.TutorialActivator">
+      </startup>
+   </extension>
+
+</plugin>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<compositeCheatsheet name="Develop OpenClovis model">
+   <taskGroup name="Develop OpenClovis model" kind="sequence">
+      <intro>
+         Welcome to OpenClovis model development tutorial.
+         This guide will walk you through the process of creating a new model, configuring HA, performing manageability, generate ASP ready model application source, build source, create images and deploy it to target machine.
+         To assist you along the way, wizards and commands will be available for you to launch automatically.
+      </intro>
+      <task kind="cheatsheet" name="Create model" skip="true">
+         <param name="id" value="com.clovis.cw.tutorial.cheatsheet.createModel" />
+         <intro>This guide will walk you through the process of setting up OpenClovis environment, creating a new model and getting familiar with the OpenClovis IDE.</intro>
+         <onCompletion>Congratulations! You just created a model!</onCompletion>
+      </task>
+      <task kind="cheatsheet" name="Configure HA (High Availability)" skip="true">
+         <param name="id" value="com.clovis.cw.tutorial.cheatsheet.configureHA" />
+         <intro>This guide will walk you through the process of configuring components, associating resources for components and configuring AMF.</intro>
+         <onCompletion>Congratulations! You just configured HA for the model!</onCompletion>
+      </task>
+      <task kind="cheatsheet" name="Perform manageability" skip="true">
+         <param name="id" value="com.clovis.cw.tutorial.cheatsheet.performManageability" />
+         <intro>This guide will walk you through the process of importing mibs, modeling resources, configuring alarms and associating resources for components.</intro>
+         <onCompletion>Congratulations! You just performed manageability for the model!</onCompletion>
+      </task>
+      <task kind="cheatsheet" name="Build and deploy" skip="true">
+         <param name="id" value="com.clovis.cw.tutorial.cheatsheet.buildAndDeploy" />
+         <intro>This guide will walk you through the process of generating source code, customizing generated code, build, creating image, deploying image and running ASP.</intro>
+         <onCompletion>Congratulations! You just built and deployed the model!</onCompletion>
+      </task>
+   </taskGroup>
+</compositeCheatsheet>

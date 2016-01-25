@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cheatsheet title="Configure HA (High Availability)">
+   <intro>
+      <description>
+         Welcome to OpenClovis configure HA tutorial.
+         This guide will walk you through the process of configuring components, associating resources for components and configuring AMF.
+      </description>
+   </intro>
+   <item title="Model/Configure Components" dialog="true" skip="true">
+      <description>
+         The Component Editor shows the types of logical objects in our system. It gives us a place to create new objects and interact with the objects that already exist.
+      </description>
+      <subitem label="Open Component Editor. Select &quot;Clovis-&gt;Component Editor&quot; from the main menu." skip="true">
+         <action class="com.clovis.cw.tutorial.actions.TutorialOpenComponentEditorAction" pluginId="com.clovis.cw.tutorial" confirm="false">
+         </action>
+      </subitem>
+      <subitem label="Expanding the Palette on the right hand side of editor, you will see the list of objects that can be dragged onto the editor view to add to our model." skip="true">
+      </subitem>
+      <subitem label="Once an object is on the editor, you can view and change its properties by right clicking on the object and selecting Properties... from the context menu." skip="true">
+      </subitem>
+      <subitem label="Change the redundancy of an application by changing the &apos;Redundancy Model&apos; property of corresponding Service Group. You can access the property as mentioned in the previous step." skip="true">
+      </subitem>
+   </item>
+   <item title="Configure Physical Instances/AMF Configuration" dialog="true" skip="false">
+      <description>
+         The configuration of our logical models is complete. During this process we have defined all of the &apos;types&apos; of objects in our system. Now it is time to configure actual instances of those objects so that they can be built and deployed.
+      </description>
+      <subitem label="Object instance configuration is done through the Availability Management Framework (AMF) via the AMF Configuration dialog. Select &quot;Clovis-&gt;AMF Configuration...&quot; from the main menu." skip="true">
+         <action class="com.clovis.cw.tutorial.actions.TutorialAMFConfigurationAction" pluginId="com.clovis.cw.tutorial" confirm="false">
+         </action>
+      </subitem>
+      <subitem label="Select &apos;Node Instance List&apos; option in left hand side pane under AMF Configuration. Here you can create node instance hierarchy by selecting node type, blade type to associate it with and node count. Once selection is complete, click on Create Instance Tree button to create node instances with default configuration. Expand the &apos;Node Instance List&apos; node to see and modify the created node instances." skip="true">
+      </subitem>
+      <subitem label="Select &apos;Service Group List&apos; option in left hand side pane under AMF Configuration. Specify the service group type and node instances to be associated with the created service group instance. Once selection is complete, click on Create Instance tree button to create service group instances with default configuration. Expand the &apos;Service Group List&apos; node to see and modify the Created service group instances." skip="true">
+      </subitem>
+   </item>
+</cheatsheet>

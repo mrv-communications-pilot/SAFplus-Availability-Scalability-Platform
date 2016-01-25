@@ -1,0 +1,1265 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<wizards>
+  <section hidden="false" id="servicegroup" description="Service Group">
+    <content>
+      <html>
+	<head>
+	  <script language="Javascript">
+		    <!-- 
+		       function isNumberKey(evt, text, max) { var charCode = (evt.which) 
+		       ? evt.which : evt.keyCode; if(charCode == 13) { return false; } if (charCode 
+		       > 31 && (charCode < 48 || charCode > 57)){ return false; } var textValue 
+		      = text.value; textValue = textValue.concat(String.fromCharCode(charCode)); 
+		      var intValue = parseInt(textValue); if(intValue > max) { return false; } 
+		      return true; } 
+		      -->
+	  </script>
+	      <style type="text/css">
+		table.code { border: 5px solid #E5EECC; outline: 1px solid #D4D4D4; }
+		table.desc { background-color: #E5EECC; border: 1px solid #D4D4D4; color: #000000; padding: 8px 10px; font-size: small; }
+		table.entry { background-color: #FFFFFF; border: 1px solid #D4D4D4; padding: 4px; }
+
+                .title { background-color: #005080; color: #d0ffff; padding: 2px; font-size: x-large;}
+                .byline { background-color: #004a7a; color: #efefef; padding: 1px;  font-size: small; font-style:italic; }
+                p { text-indent: 1em; }
+	      </style>
+	</head>
+
+	<body>
+	  <form name='form'>
+	    <table class="desc">
+	      <tr>
+		<td>
+		    How many different programs (SAF Components) are in this application?
+		    <br />
+		    <small>
+		      This does not include redundant copies of the same
+		      program.
+		      For example, for a web services architecture with
+		      load balancer,
+		      web server and database enter "3" in this
+		      field.
+		    </small>
+		    <br />
+		    <br />
+		    <center>
+		      <table class="entry" width="100%">
+			<tr>
+			  <td>
+			    Number of programs:
+			  </td>
+			  <td>
+			    <input type="text" name="numberprocesses" id="numberprocesses" onkeypress="return isNumberKey(event, this, 8);" />
+			  </td>
+			</tr>
+		      </table>
+		    </center>
+		</td>
+	      </tr>
+	    </table>
+	  </form>
+	</body>
+      </html>
+    </content>
+    <subsections>
+      <section hidden="false" id="redundancymodel" description="Redundancy Model">
+	<content>
+	  <html>
+	    <head>
+	      <script language="Javascript">
+	      </script>
+	      <style type="text/css">
+		table.code { border: 5px solid #E5EECC; outline: 1px solid #D4D4D4; }
+		table.desc { background-color: #E5EECC; border: 1px solid #D4D4D4; color: #000000; padding: 8px 10px; font-size: small; }
+		table.entry { background-color: #FFFFFF; border: 1px solid #D4D4D4; padding: 4px; }
+
+                .title { background-color: #005080; color: #d0ffff; padding: 2px; font-size: x-large;}
+                .byline { background-color: #004a7a; color: #efefef; padding: 1px;  font-size: small; font-style:italic; }
+                p { text-indent: 1em; }
+	      </style>
+	    </head>
+	    <body>
+
+	      <center class='title'>Redundancy Model</center>
+	      <center class='byline'>...specifies how processes (generally running on separate machines) spare for each other...</center>
+	      <form name='form'>
+		<table class="desc">
+		  <tr>
+		    <td>
+		      <p/><strong>1+1 redundancy</strong>: Pairs of processes sparing each other.
+		      <p/><strong>N+M redundancy</strong>: For a set of active processes that are spared by a set of standby processes choose "N+M".  The common telecom N+1 configuration is a subset of this. And also the multiple-standby configurations like 1+2.  We will ask you the exact numbers in subsequent questions.
+		      <p /><strong>Custom redundancy</strong>:
+		      If you need to explicitly specify your sparing at run time, choose "custom redundancy". The system will not assign active/standby roles automatically; instead it will wait for you to call an API to assign roles.  This is often used in cases where constraints that can only be determined at run-time (such as hardware capabilities) are needed to determine redundancy. 
+		      <p/>
+
+		      <table class="entry" width="100%">
+			<tr>
+			  <td>
+			    Redundancy Model:</td>
+			  <td>
+			    <select id="redundancyModel">
+			      <option value="CL_AMS_SG_REDUNDANCY_MODEL_NO_REDUNDANCY">No Redundancy</option>
+			      <option value="CL_AMS_SG_REDUNDANCY_MODEL_TWO_N">1+1</option>
+			      <option value="CL_AMS_SG_REDUNDANCY_MODEL_M_PLUS_N">N+M</option>
+			      <option value="CL_AMS_SG_REDUNDANCY_MODEL_CUSTOM">Custom Redundancy</option>
+			    </select>
+			  </td>
+
+			</tr>
+		      </table>
+		    </td>
+		  </tr>
+		</table>
+	      </form>
+	    </body>
+	  </html>
+	</content>
+	<subsections>
+	  <section hidden="true" id="CustomConfig" description="Custom Redundancy Configuration">
+	    <content>
+	      <html>
+		<head>
+		  <script language="Javascript">
+		    <!-- 
+		       function isNumberKey(evt, text, max) { var charCode = (evt.which) 
+		       ? evt.which : evt.keyCode; if(charCode == 13) { return false; } if (charCode 
+		       > 31 && (charCode < 48 || charCode > 57)){ return false; } var textValue 
+		      = text.value; textValue = textValue.concat(String.fromCharCode(charCode)); 
+		      var intValue = parseInt(textValue); if(intValue > max) { return false; } 
+		      return true; } 
+		      -->
+		  </script>
+		  <style type="text/css">
+		table.code { border: 5px solid #E5EECC; outline: 1px solid #D4D4D4; }
+		table.desc { background-color: #E5EECC; border: 1px solid #D4D4D4; color: #000000; padding: 8px 10px; font-size: small; }
+		table.entry { background-color: #FFFFFF; border: 1px solid #D4D4D4; padding: 4px; }
+
+                .title { background-color: #005080; color: #d0ffff; padding: 2px; font-size: x-large;}
+                .byline { background-color: #004a7a; color: #efefef; padding: 1px;  font-size: small; font-style:italic; }
+                p { text-indent: 1em; }
+	     	  </style>
+		</head>
+		<body>
+	      <center class='title'>Custom Redundancy Configuration</center>
+	      <center class='byline'>...specify details about the custom redundancy model...</center>
+
+		  <form name='form'>
+		    <table class="desc">
+		      <tr>
+			<td>
+			  <table class="entry" width="100%">
+			    <tr>
+			      <td>
+				Maximum active processes for a work assignment (Max Active SUs per SI):
+			      </td>
+			      <td>
+				<input type="text" id="numPrefActiveSUsPerSI" value="1" onkeypress="return isNumberKey(event, this, 8);" />
+			      </td>
+			    </tr>
+			  </table>
+			</td>
+		      </tr>
+		    </table>
+		  </form>
+		</body>
+	      </html>
+	    </content>
+	  </section>
+	  <section hidden="true" id="NMconfig" name="N+M configuration" description="N+M configuration">
+	    <content>
+	      <html>
+		<head>
+		  <script language="Javascript">
+		    <!-- 
+		       function isNumberKey(evt, text, max) { var charCode = (evt.which) 
+		       ? evt.which : evt.keyCode; if(charCode == 13) { return false; } if (charCode 
+		       > 31 && (charCode < 48 || charCode > 57)){ return false; } var textValue 
+		      = text.value; textValue = textValue.concat(String.fromCharCode(charCode)); 
+		      var intValue = parseInt(textValue); if(intValue > max) { return false; } 
+		      return true; } 
+		      -->
+		  </script>
+		  <style type="text/css">
+		table.code { border: 5px solid #E5EECC; outline: 1px solid #D4D4D4; }
+		table.desc { background-color: #E5EECC; border: 1px solid #D4D4D4; color: #000000; padding: 8px 10px; font-size: small; }
+		table.entry { background-color: #FFFFFF; border: 1px solid #D4D4D4; padding: 4px; }
+
+                .title { background-color: #005080; color: #d0ffff; padding: 2px; font-size: x-large;}
+                .byline { background-color: #004a7a; color: #efefef; padding: 1px;  font-size: small; font-style:italic; }
+                .subtitle { padding: 0px;  font-size: large; font-style:italic; }
+                p { text-indent: 1em; }
+	    	  </style>
+		</head>
+		<body>
+	      <center class='title'>N+M Redundancy Configuration</center>
+	      <center class='byline'>...specify details about the N+M redundancy model...</center>
+
+		  <form name='form'>
+		    <table class="desc">
+		      <tr>
+			<td>
+		    <center class="subtitle">Active/Standby/Idle Processes</center>
+			    <p>Some people conceptualize redundancy as separate applications (processes) sparing for each other. But in SAF
+			    the "application" (Service Group) is an abstract entity that contains multiple processes very likely running on
+			    different machines. Its just a different way to label the same essential architecture.</p>
+<p/>
+			    The following questions ask that you choose the number of active, hot-standby, and cold-standby (idle) processes. Your answers should describe the numbers inside one "instance" of your application -- not necessarily the total in your cluster.
+			    <p>
+			    For example, you can have multiple instances of the
+			    application running within your cluster. You could have 1
+			    instance of 2+2 redundancy, OR 2 instances of 1+1
+			    redundancy
+			    and still have 2 active and 2 standby processes
+			    running.
+			    The differences between these 2 configurations are subtle and beyond the scope of this wizard.
+			    </p>
+			  <!-- Additionally, you will be asked how many hot standby vs. 
+			       cold standby process you want. A "hot standby" process is explicitly designated 
+			       to be sparing a particular "active" process a runtime. It can therefore receive 
+			       state updates from its active process, allowing an extremely rapid failover. 
+			       A "cold standby" process is running but not explicitly sparing a particular 
+			       active process. So failover to a cold standby process my be a little slower. -->
+
+			  <table class="entry" width="100%">
+			    <tr>
+			      <td>
+				Number of active processes (SAF Active SUs):
+			      </td>
+			      <td>
+				<input type="text" id="numPrefActivesSUs" value="1" onkeypress="return isNumberKey(event, this, 8);" />
+			      </td>
+			    </tr>
+			  </table>
+			</td>
+		      </tr>
+		    </table>
+
+		    <table class="desc">
+		      <tr>
+			<td>
+		    <p>A hot standby process spares one or more specific active processes. It can exchange state with the active process resulting in extremely fast fault recovery times.</p>
+			  <table class="entry" width="100%">
+			    <tr>
+			      <td>
+				Number of hot standby processes (SAF Standby SUs):
+			      </td>
+			      <td>
+				<input type="text" id="numPrefStandbySUs" onkeypress="return isNumberKey(event, this, 8);" />
+			      </td>
+			    </tr>
+			  </table>
+			</td>
+		      </tr>
+		    </table>
+		    <table class="desc">
+		      <tr>
+			<td>
+			    <p>A cold standby (also called unassigned or idle) process is running but not sparing any specific active processes.  After a failure, a cold standby process may be assigned active (or even standby). Since it was not exchanging state with the active, the system may lose state or need more time to take over the active's workload (depending on your application), since you may be unable to recreate the active's state or need time to generate it from other data.</p>
+			  <table class="entry" width="100%">
+			    <tr>
+			      <!-- Note the model's tag: numPrefInserviceSUs = active+hot 
+				   standby+cold standby -->
+			      <td>
+				Number of cold standby processes:
+			      </td>
+			      <td>
+				<input type="text" id="numPrefInserviceSUs"
+				       onkeypress="return isNumberKey(event, this, 8);" />
+			      </td>
+			    </tr>
+			    <!-- <tr> <td align="right"> Assigned SUs: Assigned is the 
+				 number of active + cold standby so this need not be asked </td> <td> <input 
+													 type="text" name="numPrefAssignedSUs" id="numPrefAssignedSUs" onkeypress="return 
+																						   isNumberKey(event, this, 8);"/> </td> </tr> -->
+			    <!-- Delete this and set alpha factor to "off". Off might be 
+				 0 might be 100 I forget -->
+			    <!-- <tr> <td align="right"> Alpha factor (M+N): </td> <td> 
+				 <input type="text" name="alphaFactor" id="alphaFactor" onkeypress="return 												    isNumberKey(event, this, 8);"/> </td> </tr> -->
+
+			  </table>
+			</td>
+		      </tr>
+		    </table>
+
+		    <table class="desc">
+		      <tr>
+			<td>
+		    <center class="subtitle">Active/Standby Ratios</center>
+
+			  The Active/Standby percentage describes how roles should be assigned when the total number of processes is fewer then you specified.
+			  For example, if you choose 8+2 redundancy and specify this field as 50%, then as processes come up they will be assigned in this order:
+<ul>
+<li>
+			  Active -- The first
+			  process is
+			  always active of course!
+</li>
+<li>
+			  Standby -- To meet the
+			  50% ratio
+</li>
+<li>
+			  Active -- If the ratio is exact (a tie), the next assignment will be "active"...
+</li>
+<li>
+			  Standby -- To meet the 50% ratio
+</li>
+<li>
+			  Active
+</li>
+<li>
+			  Active -- We have met our goal of 2 standby (remember we chose 8+2 redundancy) so all subsequent are assigned active.
+</li>
+<li>
+ Active
+</li>
+<li>
+			    Active
+</li>
+</ul>
+			    <p>
+			    But choosing 75% would create 3 Active processes, then 1
+			    standby, then 3 more active and finally 1 standby.
+</p>
+<p>
+			    And finally, choosing 100% would create 6 active and then 2 standby.
+</p>
+
+			  <table class="entry" width="100%">
+			    <tr>
+			      <td>
+				Active/Standby Percentage:
+		   	      </td>
+			      <td>
+				<input type="text" name="betaFactor" id="betaFactor" onkeypress="return isNumberKey(event, this, 100);" />
+			      </td>
+			    </tr>
+			  </table>
+			</td>
+		      </tr>
+		    </table>
+		  </form>
+		</body>
+	      </html>
+	    </content>
+	  </section>
+	</subsections>
+      </section>
+      <section hidden="false" id="workassignments" description="Work Assignments">
+	<content>
+	  <html>
+	    <head>
+	      <script language="Javascript">
+		<!-- 
+		   function isNumberKey(evt, text, max) { var charCode = (evt.which) 
+		   ? evt.which : evt.keyCode; if(charCode == 13) { return false; } if (charCode 
+		   > 31 && (charCode < 48 || charCode > 57)){ return false; } var textValue 
+		  = text.value; textValue = textValue.concat(String.fromCharCode(charCode)); 
+		  var intValue = parseInt(textValue); if(intValue > max) { return false; } 
+		  return true; } 
+		  -->
+	      </script>
+	      <style type="text/css">
+		table.code { border: 5px solid #E5EECC; outline: 1px solid #D4D4D4; }
+		table.desc { background-color: #E5EECC; border: 1px solid #D4D4D4; color: #000000; padding: 8px 10px; font-size: small; }
+		table.entry { background-color: #FFFFFF; border: 1px solid #D4D4D4; padding: 4px; }
+
+                .title { background-color: #005080; color: #d0ffff; padding: 2px; font-size: x-large;}
+                .byline { background-color: #004a7a; color: #efefef; padding: 1px;  font-size: small; font-style:italic; }
+                .subtitle { padding: 0px;  font-size: large; font-style:italic; }
+                p { text-indent: 1em; }
+	      </style>
+	    </head>
+	    <body>
+	      <center class='title'>Work Assignments</center>
+	      <center class='byline'>...specify details about how jobs are assigned to the application...</center>
+
+	      <form name='form'>
+		<table class="desc" width="100%">
+		  <tr>
+		    <td>
+<p>
+		      Work assignments (SAF SIs) are the manner in which processes are
+		      provisioned with tasks and assigned redundancy
+		      roles. You can specify the maximum number of work assignments
+		      that a single process (SAF SU) can handle both in the active
+		      and standby roles. These fields are filled with default values
+		      that are so large they essentially remove the limit.
+</p>
+		    </td>
+		  </tr>
+		  <tr>
+		    <td>
+		      <table class="entry" width="100%">
+			<tr>
+			  <td>
+			    Maximum active work assignments per process<br/>(SAF active SIs per SU):
+			  </td>
+			  <td>
+			    <input type="text" id="maxActiveSIsPerSU" value="10000" onkeypress="return isNumberKey(event, this, 10000);" />
+			  </td>
+			</tr>
+			<tr>
+			  <td>
+			    Maximum standby work assignments per process<br/>(SAF standby SIs per SU):
+			  </td>
+			  <td>
+			    <input type="text" id="maxStandbySIsPerSU" value="10000" onkeypress="return isNumberKey(event, this, 10000);" />
+			  </td>
+			</tr>
+		      </table>
+		    </td>
+		  </tr>
+		  <tr>
+		    <td>
+		      <center class="subtitle">Example: N+1</center> 
+<p>In a typical N+1 configuration (say 3+1), a single standby node backs up N active nodes. So let's suppose that each active node can handle one "work assignment" (of course what your application actually does in response to that work assignment is totally up to you -- it could be many things).  So choose 1 for "maximum active work assignments..." Now, if your standby node has the capability to <strong>simultaneously</strong> handle the work for multiple active nodes (it is more powerful, for example), then choose 3 (whatever your actual number of active nodes) for "maximum standby work assignments...".  But if your standby node can only handle failure of 1 active node, then choose 1 here.</p>
+		    </td>
+		  </tr>
+		</table>
+	      </form>
+	    </body>
+	  </html>
+	</content>
+      </section>
+
+      <section hidden="false" id="advancedredundancymodelconcepts" description="Advanced Redundancy Model Concepts">
+	<content>
+	  <html>
+	    <head>
+	      <script language="Javascript">
+		<!-- 
+		   function isNumberKey(evt, text, max) { var charCode = (evt.which) 
+		   ? evt.which : evt.keyCode; if(charCode == 13) { return false; } if (charCode 
+		   > 31 && (charCode < 48 || charCode > 57)){ return false; } var textValue 
+		  = text.value; textValue = textValue.concat(String.fromCharCode(charCode)); 
+		  var intValue = parseInt(textValue); if(intValue > max) { return false; } 
+		  return true; } 
+		  -->
+	      </script>
+	      <style type="text/css">
+		table.code { border: 5px solid #E5EECC; outline: 1px solid #D4D4D4; }
+		table.desc { background-color: #E5EECC; border: 1px solid #D4D4D4; color: #000000; padding: 8px 10px; font-size: small; }
+		table.entry { background-color: #FFFFFF; border: 1px solid #D4D4D4; padding: 4px; }
+
+                .title { background-color: #005080; color: #d0ffff; padding: 2px; font-size: x-large;}
+                .byline { background-color: #004a7a; color: #efefef; padding: 1px;  font-size: small; font-style:italic; }
+                .subtitle { padding: 0px;  font-size: large; font-style:italic; }
+                p { text-indent: 1em; }
+	      </style>
+	    </head>
+	    <body>
+	      <center class='title'>Advanced redundancy model concepts</center>
+	      <center class='byline'>...dynamic details concerning work loading and failure handling...</center>
+
+	      <form name='form'>
+		<table class="desc" width="100%">
+		  <tr>
+		    <td>
+		      <table class="entry" width="100%">
+			<tr>
+			  <td>
+			    Work Assignment Strategy:
+			  </td>
+			  <td>
+			    <select id="loadingStrategy">
+			      <option selected="selected" value="CL_AMS_SG_LOADING_STRATEGY_LEAST_SI_PER_SU">Distribute the work (fewest SIs on each SU)</option>
+			      <option value="CL_AMS_SG_LOADING_STRATEGY_LEAST_SU_ASSIGNED">Use the smallest number of nodes (fewest SUs assigned)</option>
+			      <option value="CL_AMS_SG_LOADING_STRATEGY_BY_SI_PREFERENCE">Assign based on configured work preference</option>
+			      <option value="CL_AMS_SG_LOADING_STRATEGY_USER_DEFINED">User defined</option>
+			    </select>
+			  </td>
+			</tr>
+		      </table>
+		    </td>
+		  </tr>
+		</table>
+		<table class="desc" width="100%">
+		  <tr>
+		    <td>
+<p>
+			After processes fail, they may be restarted or may cause a
+			failover (later you will be allowed to determine this). If a
+			failover occurs should the system automatically
+			restart the failed application's processes? 
+</p><p>
+If you select
+			"no" your management application will need to make an
+			explicit API call to "repair" these failed processes (actually SAF SUs), presumably after you have solved the underlying issue that was causing the failure (you may use the OpenClovis Debug CLI to set the "repaired" flag).
+                        If you select "yes" the system will continually attempt to restart the failed entity.
+</p>
+		      <table class="entry" width="100%">
+			<tr>
+			  <td>
+			    Autorepair:
+			  </td>
+			  <td>
+			    <select id="autoRepair">
+			      <option value="CL_TRUE" selected="selected">Yes</option>
+			      <option value="CL_FALSE">No</option>
+			    </select>
+			  </td>
+			</tr>
+		      </table>
+		    </td>
+		  </tr>
+		</table>
+		<table class="desc" width="100%">
+		  <tr>
+		    <td>
+<p>
+			Co-location allows redundant processes to exist on the same
+			node.
+</p><p>		
+			Generally this is not a good practice since you may lose
+			hardware redundancy. But if you do not have redundant
+			hardware, this feature allows you to run redundant software.
+</p><p>			
+			But even with this option selected "yes" you will still need to
+			explicitly instantiate 2 processes (SAF Service Units) onto
+			the same node to cause this to happen. And actually, this feature is
+			useful during certain operations like software upgrade in
+			which you may temporarily want 2 versions of the application
+			on the same node, one running one stopped. In sum, we
+			recommend that this field be entered as yes even though the
+			feature is not recommended for normal use when you need
+			redundant hardware.
+</p>
+		      <table class="entry" width="100%">
+			<tr>
+			  <td>
+			    Co-location?
+			  </td>
+			  <td>
+			    <select id="isCollocationAllowed">
+			      <option value="CL_TRUE" selected="selected">Yes</option>
+			      <option value="CL_FALSE">No</option>
+			    </select>
+			  </td>
+			</tr>
+		      </table>
+		    </td>
+		  </tr>
+		</table>
+		<table class="desc" width="100%">
+		  <tr>
+		    <td>
+<p>
+			Auto adjust defines behavior when active and standbys are
+			assigned and then state changes cause these assignments
+			to be sub-optimal -- that is, different then they would be if
+			the
+			assignments had occurred from a cluster start-up). 
+</p><p>
+                        For example, node removal may cause a situation where there is
+			unassigned work A but simultaneously a process is acting as
+			standby for work B. If you want the standby to stop sparing
+			for B and become active for A choose "Yes". If you want
+			standby assignments to "stick", choose "No". Sticky standby
+			assignments may seem unintuitive at first but actually are
+			very useful if it takes significant time for a standby to
+			synchronize with an active, for example.
+</p>
+		      <table class="entry" width="100%">
+			<tr>
+			  <td>
+			    Auto adjust?
+			  </td>
+			  <td>
+			    <select id="autoAdjust">
+			      <option value="CL_TRUE" selected="selected">Yes</option>
+			      <option value="CL_FALSE">No</option>
+			    </select>
+			  </td>
+			</tr>
+			<tr>
+			  <td>
+			    Time interval between adjustment checks (in mSec):
+			  </td>
+			  <td>
+			    <input type="text" id="autoAdjustProbation" value="10000" onkeypress="return isNumberKey(event, this, 10000000);" />
+			  </td>
+			</tr>
+		      </table>
+		    </td>
+		  </tr>
+		</table>
+	      </form>
+	    </body>
+	  </html>
+	</content>
+      </section>
+
+      <section hidden="false" id="timersandtimeouts" description="Timers and Timeouts">
+	<content>
+	  <html>
+	    <head>
+	      <script language="Javascript">
+		<!-- 
+		   function isNumberKey(evt, text, max) { var charCode = (evt.which) 
+		   ? evt.which : evt.keyCode; if(charCode == 13) { return false; } if (charCode 
+		   > 31 && (charCode < 48 || charCode > 57)){ return false; } var textValue 
+		  = text.value; textValue = textValue.concat(String.fromCharCode(charCode)); 
+		  var intValue = parseInt(textValue); if(intValue > max) { return false; } 
+		  return true; } 
+		  -->
+	      </script>
+	      <style type="text/css">
+		table.code { border: 5px solid #E5EECC; outline: 1px solid #D4D4D4; }
+		table.desc { background-color: #E5EECC; border: 1px solid #D4D4D4; color: #000000; padding: 8px 10px; font-size: small; }
+		table.entry { background-color: #FFFFFF; border: 1px solid #D4D4D4; padding: 4px; }
+
+                .title { background-color: #005080; color: #d0ffff; padding: 2px; font-size: x-large;}
+                .byline { background-color: #004a7a; color: #efefef; padding: 1px;  font-size: small; font-style:italic; }
+                .subtitle { padding: 0px;  font-size: large; font-style:italic; }
+                p { text-indent: 1em; }
+	      </style>
+	    </head>
+	    <body>
+	      <center class='title'>Timers and Timeouts</center>
+	      <center class='byline'> </center>
+
+	      <form name='form'>
+		<table class="desc" width="100%">
+		  <tr>
+		    <td>
+<p>
+After the application becomes ready to be started (during cluster boot for example), wait this amount of time before actually starting it up.  Specified in milliseconds.
+</p>
+
+		      <table class="entry" width="100%">
+			<tr>
+			  <td>
+			    Instantiation Delay:
+			  </td>
+			  <td>
+			    <input type="text" id="instantiationInterval" value="10000" onkeypress="return isNumberKey(event, this, 10000000);" />
+			  </td>
+			</tr>
+		      </table>
+		    </td>
+		  </tr>
+		</table>
+	      </form>
+	    </body>
+	  </html>
+	</content>
+      </section>
+
+      <section hidden="false" id="errorsanderrorescalation" description="Errors and Error Escalation">
+	<content>
+	  <html>
+	    <head>
+	      <script language="Javascript">
+		<!-- 
+		   function isNumberKey(evt, text, max) { var charCode = (evt.which) 
+		   ? evt.which : evt.keyCode; if(charCode == 13) { return false; } if (charCode 
+		   > 31 && (charCode < 48 || charCode > 57)){ return false; } var textValue 
+		  = text.value; textValue = textValue.concat(String.fromCharCode(charCode)); 
+		  var intValue = parseInt(textValue); if(intValue > max) { return false; } 
+		  return true; } 
+		  -->
+	      </script>
+	      <style type="text/css">
+		table.code { border: 5px solid #E5EECC; outline: 1px solid #D4D4D4; }
+		table.desc { background-color: #E5EECC; border: 1px solid #D4D4D4; color: #000000; padding: 8px 10px; font-size: small; }
+		table.entry { background-color: #FFFFFF; border: 1px solid #D4D4D4; padding: 4px; }
+
+                .title { background-color: #005080; color: #d0ffff; padding: 2px; font-size: x-large;}
+                .byline { background-color: #004a7a; color: #efefef; padding: 1px;  font-size: small; font-style:italic; }
+                .subtitle { padding: 0px;  font-size: large; font-style:italic; }
+                p { text-indent: 1em; }
+
+	      </style>
+	    </head>
+	    <body>
+	      <center class='title'>Errors and Error Escalation</center>
+	      <center class='byline'> </center>
+
+	      <form name='form'>
+		<table class="desc" width="100%">
+		  <tr>
+		    <td>
+<p>
+Assuming that you are allowing process restarts, too many restarts in a row can indicate a problem that subsequent restarting simply won't fix.  So the AMF can be configured to restart a process a certain number of times within a specified time window.  If the number of restarts is exceeded, the process is considered "faulted" and the error is elevated to the SAF Service Unit level.  The Service Unit consists of all processes that make up an "application" running on one node.
+</p>
+		      <table class="entry" width="100%">
+			<tr>
+			  <td>
+			    Maximum allowed process restarts:
+			  </td>
+			  <td>
+			    <input type="text" id="compRestartCountMax" value="1" />
+			  </td>
+			</tr>
+			<tr>
+			  <td>
+			    within this time period (ms):
+			  </td>
+
+			  <td>
+			    <input type="text" id="compRestartDuration" value="10000" />
+			  </td>
+			</tr>
+<p>
+The AMF can also be configured to restart all the local processes (in this SAF Service Unit) that comprise this "application" if one process is failing.  If the number of restarts is exceeded in a certain time interval, the whole process group is considered "faulted" and service is failed over to the standby.
+</p>
+			<tr>
+			  <td>
+			    Maximum restarts of local process group (SAF Service Unit):
+			  </td>
+			  <td>
+			    <input type="text" id="suRestartCountMax" value="1" />
+			  </td>
+			</tr>
+
+			<tr>
+			  <td>
+			    within this time period (ms):
+			  </td>
+			  <td>
+			    <input type="text" id="suRestartDuration" value="10000" />
+			  </td>
+			</tr>
+<!-- 
+			<tr>
+			  <td>
+			    SG failover duration:
+			  </td>
+			  <td>
+			    <input type="text" id="failoverDuration" value="30000" />
+			  </td>
+			</tr>
+			<tr>
+			  <td>
+			    Maximum SG failover count:
+			  </td>
+			  <td>
+			    <input type="text" id="maxFailovers" />
+			  </td>
+			</tr>
+-->
+		      </table>
+		    </td>
+		  </tr>
+		</table>
+	      </form>
+	    </body>
+	  </html>
+	</content>
+      </section>
+
+      <section hidden="false" id="initialstate" description="Initial State">
+	<content>
+	  <html>
+	    <head>
+	      <script language="Javascript">
+		<!-- 
+		   function isNumberKey(evt, text, max) { var charCode = (evt.which) 
+		   ? evt.which : evt.keyCode; if(charCode == 13) { return false; } if (charCode 
+		   > 31 && (charCode < 48 || charCode > 57)){ return false; } var textValue 
+		  = text.value; textValue = textValue.concat(String.fromCharCode(charCode)); 
+		  var intValue = parseInt(textValue); if(intValue > max) { return false; } 
+		  return true; } 
+		  -->
+	      </script>
+	      <style type="text/css">
+		table.code { border: 5px solid #E5EECC; outline: 1px solid #D4D4D4; }
+		table.desc { background-color: #E5EECC; border: 1px solid #D4D4D4; color: #000000; padding: 8px 10px; font-size: small; }
+		table.entry { background-color: #FFFFFF; border: 1px solid #D4D4D4; padding: 4px; }
+
+                .title { background-color: #005080; color: #d0ffff; padding: 2px; font-size: x-large;}
+                .byline { background-color: #004a7a; color: #efefef; padding: 1px;  font-size: small; font-style:italic; }
+                .subtitle { padding: 0px;  font-size: large; font-style:italic; }
+                p { text-indent: 1em; }
+	      </style>
+	    </head>
+	    <body>
+	      <center class='title'>Initial State</center>
+	      <center class='byline'>...decide whether the application starts automatically... </center>
+
+	      <form name='form'>
+		<table class="desc" width="100%">
+		  <tr>
+		    <td>
+<p>
+You can set the initial state of the application to make it start automatically or require administrative intervention.  Three states are possible: running, idle (running but no work is assigned), and not running (no processes will exist).
+</p><p>
+To set the state of the entire application, choose it in the following dialog:
+</p>
+
+
+		      <table class="entry" width="100%">
+			<tr>
+			  <td>
+			    Desired initial application (SAF SG) state:
+			  </td>
+			  <td>
+			    <select id="adminState">
+			      <option selected="selected" value="CL_AMS_ADMIN_STATE_UNLOCKED">Running (SAF unlocked)</option>
+			      <option value="CL_AMS_ADMIN_STATE_LOCKED_A">Idle (SAF locked assigned)</option>
+			      <option value="CL_AMS_ADMIN_STATE_LOCKED_I">Stopped (SAF locked initialized)</option>
+			    </select>
+			  </td>
+			</tr>
+</table>
+	      <center class='subtitle'>Detailed Settings</center>
+
+<p>
+You can also set the startup state of particular entity types within the application.  Detailed settings override more general settings in a hierarchial fashion (application -> process group -> component -> work assignment), if the detailed setting is nearer to "Stopped".  For example, if the application is set to "running", you can set a specific component to not start up by setting its value to "stopped".  But if the application is set to "stopped", everything is stopped regardless of the entities' individual setting.
+</p><p>
+<strong>
+Best Practice: It is recommended to leave these settings at "running" since that allows stopping and starting the entire application via the single application state defined above.
+</strong>
+</p>
+<table class="entry" width="100%">
+			<tr>
+			  <td>
+			    Initial <strong>process group</strong> (SAF SU) state:
+			  </td>
+			  <td>
+			    <select id="SUadminState">
+			      <option selected="selected" value="CL_AMS_ADMIN_STATE_UNLOCKED">Running (SAF unlocked)</option>
+			      <option value="CL_AMS_ADMIN_STATE_LOCKED_A">Idle (SAF locked assigned)</option>
+			      <option value="CL_AMS_ADMIN_STATE_LOCKED_I">Stopped (SAF locked initialized)</option>
+			    </select>
+			  </td>
+			</tr>
+			<tr>
+			  <td>
+			    Initial state of <strong>processes</strong> (SAF component):
+			  </td>
+			  <td>
+			    <select id="CSIadminState">
+			      <option selected="selected" value="CL_AMS_ADMIN_STATE_UNLOCKED">Running (SAF unlocked)</option>
+			      <option value="CL_AMS_ADMIN_STATE_LOCKED_A">Idle (SAF locked assigned)</option>
+			      <option value="CL_AMS_ADMIN_STATE_LOCKED_I">Stopped (SAF locked initialized)</option>
+			    </select>
+			  </td>
+			</tr>
+
+			<tr>
+			  <td>
+			    Initial state of <strong>work assignments</strong> (SAF SI):
+			  </td>
+			  <td>
+			    <select id="SIadminState">
+			      <option selected="selected" value="CL_AMS_ADMIN_STATE_UNLOCKED">Running (SAF unlocked)</option>
+			      <option value="CL_AMS_ADMIN_STATE_LOCKED_A">Idle (SAF locked assigned)</option>
+			      <option value="CL_AMS_ADMIN_STATE_LOCKED_I">Stopped (SAF locked initialized)</option>
+			    </select>
+			  </td>
+			</tr>
+		      </table>
+		    </td>
+		  </tr>
+		</table>
+	      </form>
+	    </body>
+	  </html>
+	</content>
+      </section>
+
+    </subsections>
+  </section>
+
+  <section hidden="true" id="serviceunit" description="Program">
+    <content>
+      <html>
+	<head>
+	  <script language="Javascript">
+	    <!-- 
+	       function isNumberKey(evt, text, max) { var charCode = (evt.which) 
+	       ? evt.which : evt.keyCode; if(charCode == 13) { return false; } if (charCode 
+	       > 31 && (charCode < 48 || charCode > 57)){ return false; } var textValue 
+	      = text.value; textValue = textValue.concat(String.fromCharCode(charCode)); 
+	      var intValue = parseInt(textValue); if(intValue > max) { return false; } 
+	      return true; } 
+	      -->
+	  </script>
+	  <style type="text/css">
+		table.code { border: 5px solid #E5EECC; outline: 1px solid #D4D4D4; }
+		table.desc { background-color: #E5EECC; border: 1px solid #D4D4D4; color: #000000; padding: 8px 10px; font-size: small; }
+		table.entry { background-color: #FFFFFF; border: 1px solid #D4D4D4; padding: 4px; }
+
+                .title { background-color: #005080; color: #d0ffff; padding: 2px; font-size: x-large;}
+                .byline { background-color: #004a7a; color: #efefef; padding: 1px;  font-size: small; font-style:italic; }
+                .subtitle { padding: 0px;  font-size: large; font-style:italic; }
+                p { text-indent: 1em; }
+
+	  </style>
+	</head>
+	<body>
+	      <center class='title'>Program Configuration</center>
+
+	  <form name='form'>
+	    <table class="desc" width="100%">
+	      <tr>
+		<td>
+		  <table class="entry" width="100%">
+		    <tr>
+		      <td>
+			Program executable name:
+		      </td>
+		      <td>
+			<input type="text" id="name" />
+		      </td>
+		    </tr>
+		    <tr>
+		      <td>
+			Command line arguments:
+		      </td>
+		      <td>
+			<input type="text" width="100%" id="commandLineArgument" />
+		      </td>
+		    </tr>
+		    <tr>
+		      <td>
+			Environment variables:
+		      </td>
+		      <td>
+			<textarea rows="5" cols="60" width="100%" id="environmentVariable" />
+		      </td>
+		    </tr>
+		  </table>
+<br/>
+	      <center class='subtitle'>High Availability Capabilities</center>
+<p>
+		  The capability model defines how this program can handle work assignments.  This is commonly a limitation of the program (or hardware) itself.  For example, a program that stores work assignment state in a single global variable can clearly only handle a single active assignment.
+
+</p><p>
+<strong>
+Best Practice: It is recommended to write your programs to support multiple active (and standby) assignments since that will allow you to adjust the redundancy model without having to change the software
+</strong>
+</p>
+
+		  <table class="entry" width="100%">
+		    <tr>
+		      <td>
+			Capability Model:
+		      </td>
+		      <td>
+			<select id="capabilityModel">
+			  <option selected="selected" value="CL_AMS_COMP_CAP_X_ACTIVE_OR_Y_STANDBY">Many active assignments</option>
+			  <option value="CL_AMS_COMP_CAP_ONE_ACTIVE_OR_X_STANDBY">One active assignment</option>
+			  <option value="CL_AMS_COMP_CAP_X_ACTIVE">Active only -- standby assignments not
+			    supported</option>
+			  <option value="CL_AMS_COMP_CAP_ONE_ACTIVE">Goes active as soon as it is run (no
+			    idle or standby modes)</option>
+			</select>
+		      </td>
+		    </tr>
+		  </table>
+
+	      <center class='subtitle'>Cleanup</center>
+<p>
+If your program crashes, it may not have the opportunity to do certain cleanup (such as removing "virtual" IP addresses or deleting temporary files).  Here you can specify a cleanup script or program that the AMF will always be executed after your program is stopped, regardless of the cause.  The only time this script will not be executed is during a node or cluster failure.  If your script cannot clean up it should return a non-zero error code, which can then trigger the node to be rebooted.
+</p>
+<table class="entry" width="100%">
+		    <tr>
+		      <td>
+			Cleanup command:
+		      </td>
+		      <td>
+			<input type="text" id="cleanupCommand" />
+		      </td>
+		    </tr>
+		    <tr>
+		      <td>
+			Reboot node on cleanup failure:
+		      </td>
+		      <td>
+			<select id="nodeRebootCleanupFail">
+			  <option value="CL_TRUE">Yes</option>
+			  <option selected="selected" value="CL_FALSE">No</option>
+			</select>
+		      </td>
+		    </tr>
+		  </table>
+	      <center class='subtitle'>Recovery Actions</center>
+<p>
+If your process fails several recovery options are available.  Your choice generally depends on your application structure.  For example how difficult and time consuming is a failover verses a restart, and how closely does this application work with other apps running on the same node?
+</p><p>
+Definitions:
+</p>
+<ul>
+<li><strong>switchover:</strong> The currently active is given the opportunity to finish its work and shut itself down.</li>
+<li><strong>failover:</strong> The currently active is told to stop its work right away.</li>
+<li><strong>failfast:</strong> The currently active not told; it is simply stopped.</li>
+</ul>
+		  <table class="entry" width="100%">
+		    <tr>
+		      <td>
+			Process is restartable?:
+		      </td>
+		      <td>
+			<select id="isRestartable">
+			  <option value="CL_TRUE">Yes</option>
+			  <option value="CL_FALSE">No</option>
+			</select>
+		      </td>
+		    </tr>
+		    <tr>
+		      <td>
+			Recovery action on timeout:
+		      </td>
+		      <td>
+			<select id="recoveryOnTimeout">
+			  <!-- <option value="CL_AMS_RECOVERY_NO_RECOMMENDATION">No Recommendation</option> Default is same as comp restart -->
+			  <option selected="selected" value="CL_AMS_RECOVERY_COMP_RESTART">Process restart</option>
+			  <option value="CL_AMS_RECOVERY_COMP_FAILOVER">Application failover</option>
+			  <option value="CL_AMS_RECOVERY_NODE_SWITCHOVER">Node switchover</option>
+			  <option value="CL_AMS_RECOVERY_NODE_FAILOVER">Node failover</option>
+			  <option value="CL_AMS_RECOVERY_NODE_FAILFAST">Node failfast</option>
+			  <option value="CL_AMS_RECOVERY_CLUSTER_RESET">Cluster reset</option>
+			</select>
+		      </td>
+		    </tr>
+		  </table>
+		</td>
+	      </tr>
+	    </table>
+	  </form>
+	</body>
+      </html>
+    </content>
+    <subsections>
+      <section hidden="false" id="TimerandTimeouts" description="Instantiation and Timeouts">
+	<content>
+	  <html>
+	    <head>
+	      <script language="Javascript">
+		<!-- 
+		   function isNumberKey(evt, text, max) { var charCode = (evt.which) 
+		   ? evt.which : evt.keyCode; if(charCode == 13) { return false; } if (charCode 
+		   > 31 && (charCode < 48 || charCode > 57)){ return false; } var textValue 
+		  = text.value; textValue = textValue.concat(String.fromCharCode(charCode)); 
+		  var intValue = parseInt(textValue); if(intValue > max) { return false; } 
+		  return true; } 
+		  -->
+	      </script>
+	      <style type="text/css">
+		table.code { border: 5px solid #E5EECC; outline: 1px solid #D4D4D4; }
+		table.desc { background-color: #E5EECC; border: 1px solid #D4D4D4; color: #000000; padding: 8px 10px; font-size: small; }
+		table.entry { background-color: #FFFFFF; border: 1px solid #D4D4D4; padding: 4px; }
+
+                .title { background-color: #005080; color: #d0ffff; padding: 2px; font-size: x-large;}
+                .byline { background-color: #004a7a; color: #efefef; padding: 1px;  font-size: small; font-style:italic; }
+                .subtitle { padding: 0px;  font-size: large; font-style:italic; }
+                p { text-indent: 1em; }
+	      </style>
+	    </head>
+	    <body>
+	      <center class='title'>Instantiation and Timeouts</center>
+	      <center class='byline'>...controlling how the system detects hung processes...</center>
+
+	      <form name='form'>
+		<table class="desc" width="100%">
+		  <tr>
+		    <td>
+                      <p>All processes with lower instantiation levels are started before processes with higher instantiation levels.  Level 0 means unordered...</p>
+		    </td>
+		  </tr>
+		  <table class="entry" width="100%">
+		    <tr>
+		      <td>
+			Instantiation level:
+		      </td>
+		      <td>
+			<input type="text" id="instantiateLevel" value="0" />
+		      </td>
+		    </tr>
+                  </table>
+                </table>
+
+                <table class="desc" width="100%">
+		    <tr>
+		      <td>
+
+	          <center class='subtitle'>Process instantiation attempts</center>
+                  <p>
+                    Processes that have been started but have not yet registered with the AMF (through the saAmfComponentRegister API call) will be timed.  These next fields control restart behavior if the process crashes, quits or hangs (exceeds the instantiation timeout defined below) during this instantiation time.
+                  </p><p>
+                    The system will attempt to instantiate the process several times, THEN delay, and then try again .  You can choose values for any of these sections.  For example to always delay 10 seconds before instantiation, you might choose 0 for "instant" instantiation attempts, and 10000 for the delay.
+                  </p>
+
+                  <table class="entry" width="100%">
+		    <tr>
+		      <td>
+			Number of instant instantiation attempts:
+		      </td>
+		      <td>
+			<input type="text" id="numMaxInstantiate" value="1" />
+		      </td>
+		    </tr>
+		    <tr>
+		      <td>
+			Instantiate delay (ms):
+		      </td>
+		      <td>
+			<input type="text" id="instantiateDelay" value="5000" />
+		      </td>
+		    </tr>
+		    <tr>
+		      <td>
+			Maximum number of instantiation attempts after the delay:
+		      </td>
+		      <td>
+			<input type="text" id="numMaxInstantiateWithDelay" value="1" />
+		      </td>
+		    </tr>
+                  </table>
+		    </td>
+		      </tr>
+
+                </table>
+                <table class="desc" width="100%">
+		    <tr>
+		      <td>
+
+	          <center class='subtitle'>Process timers</center>
+                  <p>
+                    Process timers limit the maximum time the process can receive a AMF (Availability Management Framework) request before responding.  If a timer is exceeded, the process is considered failed.
+                  </p>
+                  <p><strong>All times are specified in milliseconds</strong></p>
+                  <table class="entry" width="100%">
+
+		    <tr>
+		      <td>
+			Instantiation (startup) timeout:
+		      </td>
+		      <td>
+			<input type="text" id="instantiateTimeout" value="30000" />
+		      </td>
+		    </tr>
+		    <tr>
+		      <td>
+			Termination timeout:
+		      </td>
+		      <td>
+			<input type="text" id="terminateTimeout" value="30000" />
+		      </td>
+		    </tr>
+		    <tr>
+		      <td>
+			Cleanup timeout:
+		      </td>
+		      <td>
+			<input type="text" id="cleanupTimeout" value="30000" />
+		      </td>
+		    </tr>
+		    <tr>
+		      <td>
+			Work assignment timeout:
+		      </td>
+		      <td>
+			<input type="text" id="csiSetTimeout" value="30000" />
+		      </td>
+		    </tr>
+		    <tr>
+		      <td>
+			Work removal timeout:
+		      </td>
+		      <td>
+			<input type="text" id="csiRemoveTimeout" value="30000" />
+		      </td>
+		    </tr>
+		    <tr>
+		      <td>
+			Quiescing complete timeout:
+		      </td>
+		      <td>
+			<input type="text" id="quiescingCompleteTimeout" value="30000" />
+		      </td>
+		    </tr>
+		    <tr>
+		      <td>
+			Proxied component instantiation timeout:
+		      </td>
+		      <td>
+			<input type="text" id="proxiedCompInstantiateTimeout" value="30000" />
+		      </td>
+		    </tr>
+		    <tr>
+		      <td>
+			Proxied component cleanup timeout
+		      </td>
+		      <td>
+			<input type="text" id="proxiedCompCleanupTimeout" value="30000" />
+		      </td>
+		    </tr>
+		  </table>
+		      </td>
+		    </tr>
+
+		</table>
+	      </form>
+	    </body>
+	  </html>
+	</content>
+      </section>
+
+      <section hidden="false" id="healchecksu" description="Healthcheck">
+	<content>
+	  <html>
+	    <head>
+	      <script language="Javascript">
+		<!-- 
+		   function isNumberKey(evt, text, max) { var charCode = (evt.which) 
+		   ? evt.which : evt.keyCode; if(charCode == 13) { return false; } if (charCode 
+		   > 31 && (charCode < 48 || charCode > 57)){ return false; } var textValue 
+		  = text.value; textValue = textValue.concat(String.fromCharCode(charCode)); 
+		  var intValue = parseInt(textValue); if(intValue > max) { return false; } 
+		  return true; } 
+		  -->
+	      </script>
+	      <style type="text/css">
+		table.code { border: 5px solid #E5EECC; outline: 1px solid #D4D4D4; }
+		table.desc { background-color: #E5EECC; border: 1px solid #D4D4D4; color: #000000; padding: 8px 10px; font-size: small; }
+		table.entry { background-color: #FFFFFF; border: 1px solid #D4D4D4; padding: 4px; }
+
+                .title { background-color: #005080; color: #d0ffff; padding: 2px; font-size: x-large;}
+                .byline { background-color: #004a7a; color: #efefef; padding: 1px;  font-size: small; font-style:italic; }
+                .subtitle { padding: 0px;  font-size: large; font-style:italic; }
+                p { text-indent: 1em; }
+	      </style>
+	    </head>
+	    <body>
+	      <center class='title'>Health Check</center>
+	      <center class='byline'>...controlling how the system checks application health...</center>
+	      <form name='form'>
+		<table class="desc" width="100%">
+		  <tr>
+		    <td>
+
+<p>SAF healthchecking is largely unnecessary since the system is notified instantly if your application dies via a kernel module.  Therefore a faster heathcheck implementation is to create a thread that periodically checks the state of the other threads in your application.  If it determines that something is wrong, it should simply abort().  This also gets you a "core" file which may be used to determine what is wrong with your application.  If you choose not to use SAF healthchecking, leave these values as they are and do not implement anything in the generated healthcheck callback.
+</p><p>OpenClovis supports SAF healthcheck for compatibility purposes.</p>
+		      <table class="entry" width="100%">
+			<tr>
+			  <td align="right">
+			    Period:
+		      	  </td>
+			  <td>
+			    <input type="text" id="period" value="30000" />
+			  </td>
+			</tr>
+			<tr>
+			  <td align="right">
+			    Maximum duration between responses:
+		    	  </td>
+			  <td>
+			    <input type="text" id="maxDuration" value="60000" />
+			  </td>
+			</tr>
+		      </table>
+		    </td>
+		  </tr>
+		</table>
+	      </form>
+	    </body>
+	  </html>
+	</content>
+      </section>
+    </subsections>
+  </section>
+</wizards>

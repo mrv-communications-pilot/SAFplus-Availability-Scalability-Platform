@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cheatsheet title="Build and Deploy">
+   <intro>
+      <description>
+         Welcome to OpenClovis build and deploy tutorial.
+         This guide will walk you through the process of generating source code, customizing generated code, build, creating image, deploying image and running ASP.
+      </description>
+   </intro>
+   <item title="Generate source Code" dialog="true" skip="false">
+      <description>
+         In this step we generate the source code for the model we created. The code that will be created is the framework code that handles all of the low level functionality provided by OpenClovis.
+      </description>
+      <subitem label="Select &quot;Project-&gt;Generate Source&quot; from the main menu." skip="false">
+         <action class="com.clovis.cw.tutorial.actions.TutorialGenerateSourceAction" pluginId="com.clovis.cw.tutorial" confirm="false">
+         </action>
+      </subitem>
+   </item>
+   <item title="Customize generated Code" dialog="true" skip="true">
+      <description>
+         Although the code that was generated in the previous section can be built and run, you can customize it for your product/application.
+      </description>
+      <subitem label="Open application's main source code file for customization.">
+         <action class="com.clovis.cw.tutorial.actions.TutorialCustomizeCodeAction" pluginId="com.clovis.cw.tutorial" confirm="false">
+         </action>
+      </subitem>
+      <subitem label="The source code and configuration XML files are generated and placed in sub-directories of the Project Area Location that we specified in the New Project Wizard." skip="true">
+      </subitem>
+      <subitem label="To review the generated code from within the OpenClovis IDE, go to the Clovis Workspace pane and expand the src folder for the project." skip="true">
+      </subitem>
+      <subitem label="To customize the code, open source file in which you want to make changes from the location mentioned in the previous step and modify and save it." skip="true">
+      </subitem>
+   </item>
+   <item title="Build customized code" dialog="true" skip="false">
+      <description>
+         Now that we have finished customizing the code it is time to build it. The Build Configuration dialog is used to gather specific information about the build we are about to perform.
+      </description>
+      <subitem label="Select &quot;Project-&gt;Build Project&quot; from the main menu." skip="false">
+         <action class="com.clovis.cw.tutorial.actions.TutorialBuildAction" pluginId="com.clovis.cw.tutorial" confirm="false">
+         </action>
+      </subitem>
+   </item>
+   <item title="Creating Images" dialog="true" skip="false">
+      <description>
+         Making the images will create software packages that can be deployed on target machines to run the example.
+         <br/><br/>The Make Images Configuration dialog is used to indicate information about the environment on which the images will be deployed. This information is used to tailor the images to run on that environment.
+      </description>
+      <subitem label="Select &quot;Project-&gt;Make Image(s)...&quot; from the main menu." skip="false">
+         <action class="com.clovis.cw.tutorial.actions.TutorialMakeImagesAction" pluginId="com.clovis.cw.tutorial" confirm="false">
+         </action>
+      </subitem>
+   </item>
+   <item title="Deploy Images" dialog="true" skip="false">
+      <description>
+         Now that the image has been built we must deploy it so that we can run and observe our model.
+      </description>
+      <subitem label="Select &quot;Project-&gt;Deploy Image(s)...&quot; from the main menu." skip="false">
+         <action class="com.clovis.cw.tutorial.actions.TutorialDeployAction" pluginId="com.clovis.cw.tutorial" confirm="false">
+         </action>
+      </subitem>
+   </item>
+   <item title="Run model application" dialog="true" skip="true">
+      <description>
+         Go to the deployed location as mentioned in the previous step. Start ASP and then interact with the system components.
+      </description>
+   </item>
+</cheatsheet>

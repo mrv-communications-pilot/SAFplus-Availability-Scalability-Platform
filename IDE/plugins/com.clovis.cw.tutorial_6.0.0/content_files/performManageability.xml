@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cheatsheet title="Perform Manageability">
+   <intro>
+      <description>
+         Welcome to OpenClovis perform manageability tutorial. This is an optional task.
+         This guide will walk you through the process of importing mibs, modeling resources, configuring alarms and associating resources for components.
+      </description>
+   </intro>
+   <item title="Import Mib" dialog="true" skip="true">
+      <description>
+         Launches Import Mib Dialog which will allow user to import mib resources along with attributes from mib files. Corresponding objects will be created in IDE resource editor.
+      </description>
+      <subitem label="Select &quot;Clovis-&gt;Import Mib Objects...&quot; from the main menu." skip="false">
+         <action class="com.clovis.cw.tutorial.actions.TutorialImportMibAction" pluginId="com.clovis.cw.tutorial" confirm="false">
+         </action>
+      </subitem>
+   </item>
+   <item title="Model/Configure Resources" dialog="true" skip="true">
+      <description>
+         The Resource Editor shows the types of physical objects in our system. It gives us a place to create new objects and interact with the objects that already exist.
+      </description>
+      <subitem label="Open Resource Editor. Select &quot;Clovis-&gt;Resource Editor&quot; from the main menu," skip="true">
+         <action class="com.clovis.cw.tutorial.actions.TutorialOpenResourceEditorAction" pluginId="com.clovis.cw.tutorial" confirm="false">
+         </action>
+      </subitem>
+      <subitem label="Expanding the Palette on the right hand side of editor, you will see the list of objects that can be dragged onto the editor view to add to our model." skip="true">
+      </subitem>
+      <subitem label="Once an object is on the editor, you can view and change its properties by right clicking on the object and selecting Properties... from the context menu." skip="true">
+      </subitem>
+   </item>
+   <item title="Configure Alarms for resources" dialog="true" skip="true">
+      <description>
+         Create alarms and associate them with resource.
+      </description>
+      <subitem label="Create required alarms for our model. Launch Alarm Profile dialog where alarms can be created, modified and deleted. Select &quot;Clovis-&gt;Alarm Profile...&quot; from the main menu." skip="true">
+         <action class="com.clovis.cw.tutorial.actions.TutorialAlarmProfileAction" pluginId="com.clovis.cw.tutorial" confirm="false">
+         </action>
+      </subitem>
+      <subitem label="Associate and configure alarms for resource by double clicking on particular resource in resource editor and selecting Alarm Management then Associate Alarm." skip="true">
+      </subitem>
+   </item>
+   <item title="Associate Resources for components" dialog="true" skip="true">
+      <description>
+         To associate resources for components, select component in the component editor. Right click on it and select Associate Resources...
+      </description>
+      <subitem label="Open Component Editor. Select &quot;Clovis-&gt;Component Editor&quot; from the main menu." skip="true">
+         <action class="com.clovis.cw.tutorial.actions.TutorialOpenComponentEditorAction" pluginId="com.clovis.cw.tutorial" confirm="false">
+         </action>
+      </subitem>
+   </item>
+</cheatsheet>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cheatsheet title="Create OpenClovis model">
+   <intro>
+      <description>
+         Welcome to OpenClovis model creation tutorial.
+         This guide will walk you through the process of setting up OpenClovis environment, creating a new model and getting familiar with the OpenClovis IDE.
+      </description>
+   </intro>
+   <item title="Setup OpenClovis environment" dialog="true" skip="true">
+      <description>
+         Launches OpenClovis perspective which will arrange various parts of workbench to assist user with OpenClovis model development.
+      </description>
+      <subitem label="Select &quot;Window-&gt;Open Perspective-&gt;Other...&quot; from main menu. Select &quot;OpenClovis IDE&quot; in the popup dialog." skip="true">
+         <action class="com.clovis.cw.tutorial.actions.TutorialSetOpenClovisEnvironment" pluginId="com.clovis.cw.tutorial" confirm="false">
+         </action>
+      </subitem>
+   </item>
+   <item title="Create OpenClovis model" dialog="true" skip="false">
+      <description>
+         We will now create a new project within the OpenClovis IDE with create new project wizard. The wizard captures some high-level information about the system that we are building and performs a lot of basic setup for us.
+      </description>
+      <subitem label="Launch create new project wizard. Select &quot;File-&gt;New-&gt;Project...&quot; from the main menu. Expand the &quot;Clovis&quot; item in the pouup dialog and select &quot;Clovis System Project&quot; and click Next button." skip="true">
+         <action class="com.clovis.cw.tutorial.actions.TutorialCreateProjectAction" pluginId="com.clovis.cw.tutorial" confirm="false">
+         </action>
+      </subitem>
+      <subitem label="Enter the name for new project. You can also specify few of the project properties here." skip="true">
+      </subitem>
+      <subitem label="Click on Add button to create new blade type and Delete button to remove the selected blade type. You can change the properties of blade by clicking on it. Add New Blade Type. Blade will represent the physical blade used for the system. Use the Add button to create Blade Types. You can always add more blades once this wizard is complete." skip="true">
+      </subitem>
+      <subitem label="Click on Add button to create new SAF node type and Delete button to remove the selected node type. You can change the name and class of node type." skip="true">
+      </subitem>
+      <subitem label="Click on Add button to create SAF programme type and Delete button to remove the selected SAF programme type. You can specify the appropriate programme name and associate it with a node type." skip="true">
+      </subitem>
+   </item>
+   <item title="Getting familiar OpenClovis IDE" dialog="true" skip="true">
+      <description>
+         Once the OpenClovis environment is set, you can find following items.
+      </description>
+      <subitem label="On the left hand side of the workbench, there is a Clovis Workspace which contains projects and all the project related files and folders." skip="true">
+      </subitem>
+      <subitem label="At the bottom of the workbench, there are various OpenClovis tabs like Model Problems, Model Templates, Error Log, Mib File explore, etc." skip="true">
+      </subitem>
+      <subitem label="Central portion of the workbench is for various editors like Resource Editor, Component Editor, etc." skip="true">
+      </subitem>
+   </item>
+</cheatsheet>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<migration:migrationInfo xmlns:migration="migration.ecore">
+	<update/>
+	<update>
+    </update>
+    <update/><!-- ClRcT replaced with SaAisErrorT in main.c -->
+    <update/><!-- changing file permission for the static files after copy -->
+  <update>
+    <change sourceXML="configs/clLog.xml" checkString="logConfigData xsi:nil#0">
+        <migrationStep type="40" details="logConfigData#xsi:nil"/>
+    </change>
+    <change sourceXML="configs/clLog.xml" checkString="openClovisAsp,version,log:BootConfig,log,logConfigData,maximumStreams#11">
+        <migrationStep type="11" details="logConfigData#maximumStreams"/>
+        <migrationStep type="14" details="maximumStreams#256"/>
+    </change>
+    <change sourceXML="configs/clLog.xml" checkString="openClovisAsp,version,log:BootConfig,log,logConfigData,maximumComponents#11">
+        <migrationStep type="11" details="logConfigData#maximumComponents"/>
+        <migrationStep type="14" details="maximumComponents#256"/>
+    </change>
+    <change sourceXML="configs/clLog.xml" checkString="openClovisAsp,version,log:BootConfig,log,logConfigData,maximumSharedMemoryPages#11">
+        <migrationStep type="11" details="logConfigData#maximumSharedMemoryPages"/>
+        <migrationStep type="14" details="maximumSharedMemoryPages#50"/>
+    </change>
+    <change sourceXML="configs/clLog.xml" checkString="openClovisAsp,version,log:BootConfig,log,logConfigData,maximumRecordsInPacket#11">>
+        <migrationStep type="11" details="logConfigData#maximumRecordsInPacket"/>
+        <migrationStep type="14" details="maximumRecordsInPacket#100"/>
+    </change>
+    <change sourceXML="configs/clLog.xml" checkString="precreatedStreamsData xsi:nil#0">
+        <migrationStep type="40" details="precreatedStreamsData#xsi:nil"/>
+        <migrationStep type="10" details="precreatedStreamsData#stream"/>
+    </change>
+  </update>
+</migration:migrationInfo>

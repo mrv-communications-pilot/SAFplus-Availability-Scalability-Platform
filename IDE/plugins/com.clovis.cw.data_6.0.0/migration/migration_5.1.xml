@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<migration:migrationInfo xmlns:migration="migration.ecore">
+	<update/><!-- changes in eo config for needInitialization field -->
+	<update><!-- beta factor added in Service Group properties -->
+		<change sourceXML="models/componentdata.xml">
+      		<migrationStep type="10" details="serviceGroup#betaFactor#0"/>
+    	</change>
+    	<change sourceXML="configs/clAmfDefinitions.xml">
+      		<migrationStep type="11" details="sgType#betaFactor"/>
+      		<migrationStep type="14" details="betaFactor#0"/>
+    	</change>
+    </update>
+    <update/><!-- ClRcT replaced with SaAisErrorT in main.c -->
+    <update/><!-- changing file permission for the static files after copy -->
+</migration:migrationInfo>
