@@ -372,7 +372,7 @@ define quiet-strip
 $(shell echo $1 | sed -e 's/.*target\//$$(TARGET)\//g')
 endef
 quiet_cmd_depend = DEP     $(call quiet-strip,$@)
-      cmd_depend = $(call make-depend,$<,$@,$(addprefix $(OBJ_DIR)/,$(subst .c,.o,$(subst .cxx,.o,$(notdir $<)))))
+      cmd_depend = $(call make-depend,$<,$@,$(addprefix $(OBJ_DIR)/,$(subst .c,.o,$(subst .cpp,.o,$(notdir $<)))))
 
 #-------------------------------------------------------------------------------
 # Build .o files from .c
@@ -399,7 +399,8 @@ quiet_cmd_all_ar = AR      $(call quiet-strip,$@)
 #-------------------------------------------------------------------------------
 # Create a shared library from .o files
 quiet_cmd_link_shared = LINK-SO $(call quiet-strip,$@)
-      cmd_link_shared = $(CC) $(LDFLAGS) $(TARGET_ARCH) $(EXTRA_LDLIBS) $^ -o $@ $(SHARED_LDFLAGS) 
+      cmd_link_shared = $(CC) $(LDFLAGS) $(TARGET_ARCH) $^ -o $@ $(SHARED_LDFLAGS) 
+#      cmd_link_shared = $(CC) $(LDFLAGS) $(TARGET_ARCH) $(EXTRA_LDLIBS) $^ -o $@ $(SHARED_LDFLAGS) 
 
 quiet_cmd_all_link_shared = LINK-SO $(call quiet-strip,$@)
       cmd_all_link_shared = cd $(ALL_OBJ_DIR); \
@@ -707,11 +708,11 @@ help:
 	@echo  '  [coming soon]'
 	@echo  ''
 	@echo  'Options:'
-	@echo  '  make V=0|1 [targets] 0 => quiet build, 1 => verbose build (default)'
+	@echo  '  make V=0|1 [targets] 0 => quiet build (default), 1 => verbose build'
 	@echo  '  make P=1   [targets] Build for Purify'
 	@echo  '  make G=2   [targets] Build for gcov'
 	@echo  '  make PLUS=1 [targets] Build using C++'
-	@echo  '  make R=1 [targets] Build using -O1|2|3 optimization flag'
+	@echo  '  make O=1 [targets] Build using -O0|1|2|3 optimization flag'
 	@echo  '  make S=0 [targets] Build static libraries (defaults to shared)'
 	@echo  ''
 	@echo  'Execute "make" or "make all" to build all targets'
@@ -855,7 +856,14 @@ vpath_list += ../common
 
 vpath %.c $(vpath_list)
 vpath %.cxx $(vpath_list)
+vpath %.cc $(vpath_list)
+vpath %.cpp $(vpath_list)
+vpath %.C $(vpath_list)
+vpath %.CC $(vpath_list)
+vpath %.CPP $(vpath_list)
+vpath %.CXX $(vpath_list)
 
 ifneq ($(wildcard $(PROJECT_ROOT)/$(ASP_MODEL_NAME)/mk/custom-make-common.mk),) 
 include $(PROJECT_ROOT)/$(ASP_MODEL_NAME)/mk/custom-make-common.mk
 endif
+
