@@ -249,27 +249,17 @@ ClOsalTaskIdT gGmsLeaderVerifierTask;
 static void *clGmsLeaderVerifierTask(void *cookie)
 {
   ClUint32T reportedLeader = *(ClUint32T *)cookie;
-  free(cookie);
-  ClUint32T retries = 1;
+  ClUint32T retries = 0;
   ClTimerTimeOutT delay = {.tsSec = 1, .tsMilliSec = 0};
   ClGmsNodeIdT leaderNodeId = CL_GMS_INVALID_NODE_ID;
   ClGmsNodeIdT deputyNodeId = CL_GMS_INVALID_NODE_ID;
-  ClIocNodeAddressT currentLeader;
 
   do
   {
     clLogDebug("NTF", "LEA", "Try [%d] of [%d] to verify reports leader [%d]", retries, 5, reportedLeader);
     _clGmsEngineLeaderElect(0x0, NULL, CL_GMS_MEMBER_JOINED, &leaderNodeId, &deputyNodeId);
-  } while (retries++ < 5 && (leaderNodeId != reportedLeader) && clOsalTaskDelay(delay) == CL_OK);
+  } while (retries++ < 5 && leaderNodeId != reportedLeader && clOsalTaskDelay(delay) == CL_OK);
 
-  /* New leader changed ? */
-  if ((clNodeCacheLeaderGet(&currentLeader) == CL_OK) && (leaderNodeId == currentLeader))
-  {
-    clLogDebug("NTF", "LEA", "Leader [%d], consistent with this node.", leaderNodeId);
-    return NULL;
-  }
-
-  /* Still split-brain after timeout : reboot to recovery */
   if (leaderNodeId != CL_GMS_INVALID_NODE_ID && leaderNodeId != reportedLeader)
   {
       clLogDebug("NTF", "LEA", "I am going to leave as leader changed from [0x%x] to [0x%x]", leaderNodeId, reportedLeader);
