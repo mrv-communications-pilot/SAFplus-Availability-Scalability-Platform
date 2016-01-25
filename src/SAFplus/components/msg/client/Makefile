@@ -55,10 +55,12 @@ ifeq ($(CL_INST),1)
 	CPPFLAGS += -DCL_INST
 endif
 
+
 # Library name:
 CPPFLAGS       := -I ../idl/msgIdl/client -I ../idl/msgIdl/server -I ../idl/msgIdl/common -I ../idl/msgIdl/xdr -I ../common -I ../server
 CPPFLAGS       += -I ../idl/msgClt/client -I ../idl/msgClt/server -I ../idl/msgClt/common
 CPPFLAGS       += -I ../idl/msgCltSrv/client -I ../idl/msgCltSrv/server -I ../idl/msgCltSrv/common
+CPPFLAGS       += -DCL_MESSAGE_ORDER
 
 LIB_NAMES	= libClMsgClient
 
