@@ -1385,10 +1385,10 @@ class ASPInstaller:
            print tool
            cmd = '%s' % self.ASP_PREBUILD_DIR
            os.chdir (cmd)
-           self.feedback ('Select the crossbuild tool(s) to build from the above list, [Default: local]') 
+           self.feedback ('Select the crossbuild tool(s) to build from the above list, [Default: i686]') 
            strin = self.get_user_feedback()
            if strin == None or strin == "":
-               strin = "local"
+               strin = "i686"
 
            builds = re.split('\W+', strin)
            no_tipc_build = ''
