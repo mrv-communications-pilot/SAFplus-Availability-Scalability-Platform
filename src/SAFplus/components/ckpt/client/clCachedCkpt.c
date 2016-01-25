@@ -696,6 +696,7 @@ error_out:
     return rc;
 }
 
+#if 0
 static ClBoolT clCkptEntryExist(ClCachedCkptSvcInfoT *serviceInfo, const ClNameT *sectionName, ClRcT *ret)
 {
     ClBoolT                    retVal         = CL_FALSE;
@@ -750,11 +751,14 @@ static ClBoolT clCkptEntryExist(ClCachedCkptSvcInfoT *serviceInfo, const ClNameT
     out:
     return retVal;
 }
+#endif
 
 ClRcT clCkptEntryDelete(ClCachedCkptSvcInfoT *serviceInfo, const ClNameT *sectionName)
 {
     ClRcT rc = CL_OK;
+#if 0
     ClBoolT isCkptExist = CL_FALSE;
+#endif
 
     SaCkptSectionIdT ckptSectionId = {        /* Section id for checkpoints   */
         .id = (SaUint8T *) sectionName->value,
@@ -762,12 +766,13 @@ ClRcT clCkptEntryDelete(ClCachedCkptSvcInfoT *serviceInfo, const ClNameT *sectio
     };
     ClInt32T tries = 0;
     ClTimerTimeOutT delay = {.tsSec = 0, .tsMilliSec = 500 };
-
+#if 0
 retryCheck:
     isCkptExist = clCkptEntryExist(serviceInfo, sectionName, &rc);
 
     /* Delete section from the ckpt */
   if (isCkptExist == CL_TRUE)
+#endif
     {
       tries = 0;
 retry:
@@ -780,6 +785,7 @@ retry:
             }
         }
     }
+#if 0
   else if ((CL_GET_ERROR_CODE(rc) == CL_IOC_ERR_COMP_UNREACHABLE) || (CL_IOC_ERR_HOST_UNREACHABLE == CL_GET_ERROR_CODE(rc)))
     {
       if (tries++ >= 3)
@@ -790,7 +796,7 @@ retry:
   
       goto retryCheck;
     }
-
+#endif
     return rc;
 }
 
