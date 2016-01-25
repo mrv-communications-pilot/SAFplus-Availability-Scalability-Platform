@@ -750,6 +750,8 @@ def config_tipc_module():
         ret, output, signal, core = system(cmd)        
 
 def unload_tipc_module():
+  # avoid unloading of TIPC since we don't use module
+    return
     if not is_tipc_build():
         return
 
@@ -771,6 +773,8 @@ def unload_tipc_module():
                             (cmd, cmd2, output, output2))
 
 def load_tipc_module():
+  # avoid loading of TIPC since we don't use module
+    return
     if not is_tipc_build():
         return
 
@@ -794,6 +798,8 @@ def load_config_tipc_module():
         return get_asp_tipc_netid() != 'undefined'
 
     def is_tipc_loaded():
+      # TIPC ia always loaded (since we don't use module)
+    	return True
         cmd = sys_asp['is_tipc_loaded_cmd']
         l = Popen(cmd)
         l = [e[:-1] for e in l]
