@@ -32,6 +32,9 @@ else
    	echo "Failed to install OC new version"
    fi
 fi
+echo "updating patch level .."
+patch_level=`git rev-list --count HEAD`
+echo "PATCH_LEVEL=$patch_level" >> ${install_dir}/sdk-6.0/VERSION
 
 #cp -r $src_dir/.git ${install_dir}/sdk-6.0 
 
