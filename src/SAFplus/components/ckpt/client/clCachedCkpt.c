@@ -413,6 +413,7 @@ ClRcT clCachedCkptInitialize(ClCachedCkptSvcInfoT *serviceInfo,
             do
             {
                 rc = clCkptInitialize(&ckptSvcHandle, NULL, (ClVersionT *)&ckptVersion);
+                clLogNotice("CCK", "INI", "Try [%d] of [100] to initialize checkpoint service rc[0x%x]", tries, rc);
             } while(rc != CL_OK && tries++ < 100 && clOsalTaskDelay(delay) == CL_OK);
 
             if(rc != CL_OK)
@@ -424,6 +425,7 @@ ClRcT clCachedCkptInitialize(ClCachedCkptSvcInfoT *serviceInfo,
             serviceInfo->ckptSvcHandle = ckptSvcHandle;
         }
 
+        tries = 0;
         /* Create the checkpoint for read and write. */
         do
         {
@@ -446,11 +448,11 @@ ClRcT clCachedCkptInitialize(ClCachedCkptSvcInfoT *serviceInfo,
 
     /* Create shm */
 
-    rc = clOsalShmOpen((ClCharT *)cacheName, CL_CACHED_CKPT_SHM_EXCL_CREATE_FLAGS,
+    rc = clOsalShmOpen((ClCharT *)serviceInfo->cacheName, CL_CACHED_CKPT_SHM_EXCL_CREATE_FLAGS,
                        CL_CACHED_CKPT_SHM_MODE, &serviceInfo->fd);
     if( CL_ERR_ALREADY_EXIST == CL_GET_ERROR_CODE(rc) )
     {
-        rc = clOsalShmOpen((ClCharT *)cacheName, CL_CACHED_CKPT_SHM_OPEN_FLAGS,
+        rc = clOsalShmOpen((ClCharT *)serviceInfo->cacheName, CL_CACHED_CKPT_SHM_OPEN_FLAGS,
                            CL_CACHED_CKPT_SHM_MODE, &serviceInfo->fd);
         if( CL_OK != rc )
         {
@@ -795,7 +797,8 @@ retryCheck:
       tries = 0;
 retry:
         rc = clCkptSectionDelete(serviceInfo->ckptHandle, (ClCkptSectionIdT *)&ckptSectionId);
-        if (CL_ERR_TRY_AGAIN == CL_GET_ERROR_CODE(rc))
+        if (CL_ERR_TRY_AGAIN == CL_GET_ERROR_CODE(rc) || CL_GET_ERROR_CODE(rc) == CL_IOC_ERR_COMP_UNREACHABLE
+            || CL_IOC_ERR_HOST_UNREACHABLE == CL_GET_ERROR_CODE(rc) || (CL_GET_CID(rc) == CL_CID_IOC && CL_GET_ERROR_CODE(rc) == CL_ERR_NOT_EXIST))
         {
             if ((++tries < 5) && (clOsalTaskDelay(delay) == CL_OK))
             {
@@ -978,6 +981,7 @@ ClRcT clCachedCkptSynch(ClCachedCkptSvcInfoT *serviceInfo, ClBoolT isEmpty)
             sectionData.data = copyData;
             sectionData.dataSize = ioVector.readSize - sizeof(ClIocAddressT);
 
+            clLogDebug("CCK", "SYNC", "Cache ckpt section [%s] replicated successfully.", sectionData.sectionName.value);
             if (isEmpty)
                 clCacheEntryAdd(serviceInfo, (ClCachedCkptDataT *)&sectionData);
             else
