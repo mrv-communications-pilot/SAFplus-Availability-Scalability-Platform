@@ -1,6 +1,6 @@
 #!/bin/sh
 
-install_dir=${HOME}/clovis_2015
+install_dir=${HOME}/clovis_2015_lk4_4
 cd `dirname $0`
 script_dir=$PWD
 
