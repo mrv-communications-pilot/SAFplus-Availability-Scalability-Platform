@@ -1754,10 +1754,11 @@ ClRcT clCkptSectionCreate(
             rc = VDECL_VER(_ckptSectionCreateClientSync, 4, 0, 0)( ckptIdlHdl, ckptActHdl,
                     CL_TRUE, pSecCreateAttr, (ClUint8T *)pData,
                     dataSize, &version,&index);
-            if((numRetries > 0) && 
+            if(((numRetries > 0) || (maxRetry > 0)) &&
                (CL_GET_ERROR_CODE(rc) == CL_ERR_ALREADY_EXIST))
             {
                 rc = CL_OK;
+                goto exitOnError;
             }
         }while(CL_GET_ERROR_CODE(rc) == CL_ERR_TIMEOUT && (numRetries++ < 2));                         
         tryAgain = clCkptHandleTypicalErrors(rc, ckptHdl,&nodeAddr);
@@ -1927,7 +1928,7 @@ ClRcT clCkptSectionDelete(ClCkptHdlT               ckptHdl,
      * Send the call to the checkpoint active server.
      * Retry if the server is not not reachable.
      */
-    ClTimerTimeOutT delay = {.tsSec = 0, .tsMilliSec = 200};    
+    ClTimerTimeOutT delay = {.tsSec = 0, .tsMilliSec = 500};
     do
     {
         tryAgain   = CL_FALSE;
@@ -1959,6 +1960,7 @@ ClRcT clCkptSectionDelete(ClCkptHdlT               ckptHdl,
              * hasn't received the update yet. Get active address 
              * from the master.
              */
+            clOsalTaskDelay(delay); // Waiting active address changed
             tryAgain = CL_TRUE;
             retCode = _ckptMasterActiveAddressGet(ckptHdl, &nodeAddr);
             if(retCode == CL_OK)
@@ -1966,12 +1968,12 @@ ClRcT clCkptSectionDelete(ClCkptHdlT               ckptHdl,
             else
               hostResolutionRetries = 1000;  /* Don't retry */
         }
-    } while((CL_TRUE == tryAgain) && (hostResolutionRetries < 6) && clOsalTaskDelay(delay) == CL_OK);
+    } while ((CL_TRUE == tryAgain) && (hostResolutionRetries < 6));
     
     if (rc != CL_OK)
     {
        clLogWarning("SEC", "DEL", "Delete ckpt section [%s] failed with rc [0x%x] after [%d] tries", (char*)pSectionId->id, rc, hostResolutionRetries);
-    }    
+    }
 
     /* 
      * Check for the version mismatch. 
